@@ -1,0 +1,61 @@
+* {
+  font: inherit;
+}
+
+input {
+  margin: 0.5rem;
+  width: 25rem;
+}
+
+label {
+  margin-left: 3rem;
+}
+
+.todos {
+  width: 50rem;
+}
+
+.todo-list {
+  list-style: none;
+}
+
+.todo-list button {
+  color: white;
+}
+
+.todos li {
+  margin: 0.4rem;
+  width: 80%;
+  padding: 0.8rem;
+  border: 1px solid black;
+  border-radius: 6px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+  text-align: center;
+}
+
+.todos li:hover {
+  margin-left: 1rem;
+  font-weight: bolder;
+  background-color: rgb(241, 241, 241);
+}
+
+button {
+  display: inline-block;
+  width: 15%;
+  margin-top: 0.4rem;
+  margin-left: 0.5rem;
+  padding: 0.3rem;
+  border-radius: 6px;
+}
+
+button.edit {
+  background-color: rgb(73, 143, 175);
+}
+
+button.checked {
+  background-color: green;
+}
+
+button.delete {
+  background-color: red;
+}
