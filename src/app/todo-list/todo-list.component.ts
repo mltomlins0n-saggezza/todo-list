@@ -10,6 +10,7 @@ import { TODOS } from '../mock-todos';
 export class TodoListComponent implements OnInit {
 
   todos = TODOS;
+  isVisible = false;
 
   constructor() { }
 
@@ -18,6 +19,7 @@ export class TodoListComponent implements OnInit {
 
   edit(): void {
     console.log('Item details will be edited here');
+    this.isVisible = !this.isVisible;
   }
 
   delete(): void {
