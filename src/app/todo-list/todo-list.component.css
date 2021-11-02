@@ -12,7 +12,8 @@ label {
 }
 
 .todos {
-  width: 50rem;
+  width: 50%;
+  float: left;
 }
 
 .todo-list {
