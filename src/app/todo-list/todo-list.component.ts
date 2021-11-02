@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { TODOS } from '../mock-todos';
+import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todo-list',
   templateUrl: './todo-list.component.html',
-  styleUrls: ['./todo-list.component.css']
+  styleUrls: ['./todo-list.component.css'],
 })
 export class TodoListComponent implements OnInit {
-
-  todos = TODOS;
+  todos: Todo[] = [];
   isVisible = false;
 
-  constructor() { }
+  constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
+    this.getTodos();
+  }
+
+  getTodos(): void {
+    this.todoService.getTodos()
+      .subscribe(todos => this.todos = todos);
   }
 
   edit(): void {
@@ -27,7 +34,6 @@ export class TodoListComponent implements OnInit {
   }
 
   markDone(): void {
-    console.log('Item will be marked as done here')
+    console.log('Item will be marked as done here');
   }
-
 }
