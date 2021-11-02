@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Todo } from './todo';
 import { TODOS } from './mock-todos';
@@ -8,9 +9,11 @@ import { TODOS } from './mock-todos';
   providedIn: 'root',
 })
 export class TodoService {
-  constructor() {}
+  private todosUrl = 'api/todos';
+
+  constructor(private http: HttpClient) { }
 
   getTodos(): Observable<Todo[]> {
-    return of(TODOS);
+    return this.http.get<Todo[]>(this.todosUrl);
   }
 }
