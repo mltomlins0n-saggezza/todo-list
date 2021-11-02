@@ -14,7 +14,7 @@ button {
   margin-left: 0.5rem;
   padding: 0.3rem;
   border-radius: 6px;
-  font:inherit;
+  font: inherit;
 }
 
 button.confirm {
@@ -25,4 +25,8 @@ button.confirm {
 button.cancel {
   background-color: red;
   color: white;
+}
+
+button:hover {
+  font-weight: bold;
 }
