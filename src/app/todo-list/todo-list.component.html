@@ -7,9 +7,7 @@
     <li *ngFor="let todo of todos">
       <span>{{ todo.name }}</span>
       <div>
-        <button class="edit" title="Edit details" (click)="edit()">
-          Edit
-        </button>
+        <button class="edit" title="Edit details" (click)="edit()">Edit</button>
         <button class="checked" title="Mark as done" (click)="markDone()">
           Done
         </button>
@@ -18,3 +16,5 @@
     </li>
   </ul>
 </div>
+
+<app-edit-todo *ngIf="isVisible"></app-edit-todo>
