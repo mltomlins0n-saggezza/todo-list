@@ -1,7 +1,9 @@
 <div class="todos">
   <label for="new-todo-item">New todo:</label>
-  <input id="new-todo" maxlength="300" />
-  <button class="add-button">Add</button>
+  <input id="new-todo" maxlength="300" #todoName />
+  <button class="add-button" (click)="add(todoName.value); todoName.value = ''">
+    Add
+  </button>
 
   <ul class="todo-list">
     <li *ngFor="let todo of todos">
