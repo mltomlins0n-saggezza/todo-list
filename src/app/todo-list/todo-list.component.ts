@@ -17,13 +17,6 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTodos();
-    this.printTodos(this.todos);
-  }
-
-  printTodos(todos: Todo[]): void {
-    todos.forEach((element) => {
-      console.log(element);
-    });
   }
 
   getTodos(): void {
