@@ -15,7 +15,8 @@ export class TodoListComponent implements OnInit {
   editedTodo: Todo;
 
   constructor(private todoService: TodoService) {
-    this.editedTodo = {id: 0, name: 'test', isChecked: false};
+    // This object will be overwritten with an object from the edit component
+    this.editedTodo = {id: 0, name: '', isChecked: false};
   }
 
   ngOnInit(): void {
@@ -35,10 +36,15 @@ export class TodoListComponent implements OnInit {
     })
   }
 
-  edit(todo: Todo): void {
-    console.log('Item details will be edited here');
-    this.isVisible = !this.isVisible;
+  openEditView(todo: Todo): void {
+    this.isVisible = true;
     this.editedTodo = todo;
+  }
+
+  edit(todoName: string): void {
+    // this.todoService.updateTodo({ todoName } as unknown as Todo)
+    // .subscribe();
+    this.editedTodo.name = todoName;
   }
 
   delete(todo: Todo): void {
