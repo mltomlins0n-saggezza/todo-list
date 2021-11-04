@@ -1,7 +1,7 @@
 <div id="edit-todo">
-  <h2>Edit To Do</h2>
+  <h2>Edit {{ todo.name }}</h2>
   <label for="title">New title: </label>
-  <input class="edit-field" maxlength="300" />
+  <input class="edit-field" maxlength="300" #todoTitle />
   <button class="confirm" (click)="save()">Save</button>
   <button class="cancel" (click)="cancel()">Cancel</button>
 </div>
