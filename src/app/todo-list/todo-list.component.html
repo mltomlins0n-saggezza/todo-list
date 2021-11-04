@@ -1,14 +1,16 @@
 <div class="todos">
   <label for="new-todo-item">New todo:</label>
   <input id="new-todo" maxlength="300" #todoName />
-  <button class="add" (click)="add(todoName.value); todoName.value = ''">
+  <button class="add" (click)="add(todoName.value);">
     Add
   </button>
   <ul class="todo-list">
     <li *ngFor="let todo of todos">
       <span>{{ todo.name }}</span>
       <div>
-        <button class="edit" title="Edit details" (click)="edit(todo)">Edit</button>
+        <button class="edit" title="Edit details" (click)="openEditView(todo)">
+          Edit
+        </button>
         <button class="checked" title="Mark as done" (click)="markDone()">
           Done
         </button>
@@ -18,4 +20,8 @@
   </ul>
 </div>
 
-<app-edit-todo *ngIf="isVisible" [todo]='editedTodo'></app-edit-todo>
+<app-edit-todo
+  *ngIf="isVisible"
+  [todo]="editedTodo"
+  (newTitleEvent)="edit($event)"
+></app-edit-todo>
