@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
@@ -9,21 +9,25 @@ import { TodoService } from '../todo.service';
   styleUrls: ['./edit-todo.component.css'],
 })
 export class EditTodoComponent implements OnInit {
-  // @Input() title: string;
-
   @Input() todo: Todo;
+  @Output() newTitleEvent = new EventEmitter<string>();
 
   constructor(private todoService: TodoService) {
-    // this.title = '';
-    this.todo = {id: 0, name: 'this', isChecked: false};
+    this.todo = { id: 0, name: '', isChecked: false };
   }
 
   ngOnInit(): void {}
 
-  save(): void {
-    console.log('save edited todo');
+  save(newTitle: string): void {
     if (this.todo) {
-      this.todoService.updateTodo(this.todo).subscribe();
+      this.newTitleEvent.emit(newTitle);
+      this.todoService.updateTodo({
+        id: this.todo.id,
+        name: newTitle,
+        isChecked: this.todo.isChecked,
+      });
+      // Can be used in place of the event emitter
+      // this.todo.name = newTitle;
     }
   }
 
