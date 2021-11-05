@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { EditTodoComponent } from './edit-todo.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('EditTodoComponent', () => {
   let component: EditTodoComponent;
@@ -8,7 +8,8 @@ describe('EditTodoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditTodoComponent ]
+      declarations: [ EditTodoComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });
@@ -19,7 +20,7 @@ describe('EditTodoComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should be created', () => {
     expect(component).toBeTruthy();
   });
 });
