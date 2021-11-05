@@ -20,12 +20,12 @@ export class EditTodoComponent implements OnInit {
 
   save(newTitle: string): void {
     if (this.todo) {
-      this.newTitleEvent.emit(newTitle);
       this.todoService.updateTodo({
         id: this.todo.id,
         name: newTitle,
         isChecked: this.todo.isChecked,
-      });
+      })
+      .subscribe(() => this.newTitleEvent.emit(newTitle));
       // Can be used in place of the event emitter
       // this.todo.name = newTitle;
     }
