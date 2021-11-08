@@ -26,8 +26,8 @@ export class EditTodoComponent implements OnInit {
         isChecked: this.todo.isChecked,
       })
       .subscribe(() => this.newTitleEvent.emit(newTitle));
-      // Can be used in place of the event emitter
-      // this.todo.name = newTitle;
+      // update the name on the component itself
+      this.todo.name = newTitle;
     }
   }
 
