@@ -53,11 +53,9 @@ describe('TodoListComponent', () => {
 
   it('should delete an item from the list', () => {
     expect(component.todos).toEqual(TEST_TODOS);
-    component.delete({ id: 1, name: 'TEST this', isChecked: false });
+    component.delete(testItem);
     fixture.detectChanges();
-    expect(component.todos).not.toContain({
-      id: 1, name: 'TEST this', isChecked: false,
-    });
+    expect(component.todos).not.toContain(testItem);
   });
 
   it('should show the edit component', () => {
