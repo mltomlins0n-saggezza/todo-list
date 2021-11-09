@@ -19,7 +19,7 @@ export class EditTodoComponent implements OnInit {
   ngOnInit(): void {}
 
   save(newTitle: string): void {
-    if (this.todo) {
+    if (this.todo && newTitle) { // prevent empty names
       this.todoService.updateTodo({
         id: this.todo.id,
         name: newTitle,
