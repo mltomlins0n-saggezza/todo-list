@@ -42,7 +42,7 @@ export class TodoListComponent implements OnInit {
   }
 
   edit(todoName: string): void {
-    if (todoName) { // prevent empty names
+    if (todoName) {
       this.editedTodo.name = todoName;
     }
   }
