@@ -1,4 +1,4 @@
-import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
 
@@ -39,5 +39,12 @@ describe('EditTodoComponent', () => {
     component.save(testItem.name);
     fixture.detectChanges();
     expect(component.todo.name).toEqual(testItem.name);
+  });
+
+  it('should display the name of the todo item in the DOM', () => {
+    const element = fixture.nativeElement as HTMLElement;
+    expect(element.querySelector('h2')?.textContent).toContain(
+      component.todo.name
+    );
   });
 });
