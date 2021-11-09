@@ -11,14 +11,15 @@ describe('TodoListComponent', () => {
   let fixture: ComponentFixture<TodoListComponent>;
 
   const testItem = { id: 1, name: 'TEST this', isChecked: false };
-
-  const mockTodoService = jasmine.createSpyObj<TodoService>('TodoService', {
-    getTodos: of(TEST_TODOS),
-    addTodo: of(testItem),
-    deleteTodo: of(testItem),
-  });
+  const testItem2 = { id: 2, name: 'TEST this item too', isChecked: true };
 
   beforeEach(async () => {
+    const mockTodoService = jasmine.createSpyObj<TodoService>('TodoService', {
+      getTodos: of(TEST_TODOS),
+      addTodo: of(testItem),
+      deleteTodo: of(testItem),
+    });
+
     await TestBed.configureTestingModule({
       declarations: [TodoListComponent],
       imports: [HttpClientTestingModule],
@@ -45,10 +46,9 @@ describe('TodoListComponent', () => {
   });
 
   it('should add an item to the list', () => {
-    expect(component.todos).toEqual(TEST_TODOS);
-    component.add('test add item');
+    component.add(testItem.name);
     fixture.detectChanges();
-    expect(testItem.name).toEqual('TEST this');
+    expect(component.todos).toContain(testItem);
   });
 
   it('should delete an item from the list', () => {
@@ -71,4 +71,28 @@ describe('TodoListComponent', () => {
     fixture.detectChanges();
     expect(component.editedTodo.name).toEqual(testItem.name);
   });
+
+  it('should show the edit component for each item clicked', () => {
+    component.openEditView(testItem);
+    expect(component.editedTodo).toEqual(testItem);
+    fixture.detectChanges();
+    component.openEditView(testItem2);
+    expect(component.editedTodo).toEqual(testItem2);
+    expect(component.editedTodo).not.toEqual(testItem);
+  })
+
+  it('should add, edit, then delete an item', () => {
+    component.add(testItem.name);
+    expect(component.todos).toContain(testItem);
+
+    component.openEditView(testItem);
+    expect(component.isVisible).toBeTruthy();
+    expect(component.editedTodo).toEqual(testItem);
+
+    component.edit(testItem.name);
+    expect(component.editedTodo.name).toEqual(testItem.name);
+
+    component.delete(testItem);
+    expect(component.todos).not.toContain(testItem);
+  })
 });
