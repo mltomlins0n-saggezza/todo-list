@@ -10,17 +10,19 @@ import { Todo } from './todo';
 })
 export class TodoService {
   private todosUrl = 'api/todos';
+  private http: HttpClient;
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(http: HttpClient) {
+    this.http = http;
+  }
 
   // GET a todo item by ID
   getTodo(id: number): Observable<Todo> {
     const url = `${this.todosUrl}/${id}`;
-
     return this.http.get<Todo>(url).pipe(
       catchError(this.handleError<Todo>())
     );
@@ -50,7 +52,6 @@ export class TodoService {
   // DELETE a todo from the server
   deleteTodo(id: number): Observable<Todo> {
     const url = `${this.todosUrl}/${id}`;
-
     return this.http.delete<Todo>(url, this.httpOptions).pipe(
       catchError(this.handleError<Todo>())
     );
