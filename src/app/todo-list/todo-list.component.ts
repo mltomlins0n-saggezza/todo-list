@@ -29,8 +29,9 @@ export class TodoListComponent implements OnInit {
 
   add(name: string): void {
     name = name.trim();
+    let isChecked = false;
     if (!name) { return; }
-    this.todoService.addTodo({ name } as Todo)
+    this.todoService.addTodo({ name, isChecked } as Todo)
     .subscribe(todo => {
       this.todos.push(todo);
     });
