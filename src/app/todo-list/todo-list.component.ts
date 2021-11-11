@@ -11,7 +11,6 @@ import { TodoService } from '../todo.service';
 export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   isVisible = false;
-
   editedTodo: Todo;
 
   constructor(private todoService: TodoService) {
