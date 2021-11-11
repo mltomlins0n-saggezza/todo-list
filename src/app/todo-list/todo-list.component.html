@@ -6,7 +6,12 @@
     <li *ngFor="let todo of todos">
       <span>{{ todo.name }}</span>
       <div>
-        <button class="edit" title="Edit details" (click)="openEditView(todo)">
+        <button
+          class="edit"
+          title="Edit details"
+          (click)="openEditView(todo)"
+          routerLink="./{{ todo.id }}"
+        >
           Edit
         </button>
         <button class="checked" title="Mark as done" (click)="markDone()">
@@ -18,8 +23,10 @@
   </ul>
 </div>
 
-<app-edit-todo
+<!-- <app-edit-todo
   *ngIf="isVisible"
   [todo]="editedTodo"
   (newTitleEvent)="edit($event)"
-></app-edit-todo>
+></app-edit-todo> -->
+
+<router-outlet (activate)="edit($event)"></router-outlet>
