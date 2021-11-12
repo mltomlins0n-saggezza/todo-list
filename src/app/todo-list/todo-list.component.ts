@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Todo } from '../todo';
 import { TodoService } from '../todo.service';
+import { EditTodoComponent } from '../edit-todo/edit-todo.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-todo-list',
@@ -12,6 +14,7 @@ export class TodoListComponent implements OnInit {
   todos: Todo[] = [];
   isVisible = false;
   editedTodo: Todo;
+  subscription: Subscription = new Subscription;
 
   constructor(private todoService: TodoService) {
     // This will be overwritten by the edit component
@@ -30,8 +33,7 @@ export class TodoListComponent implements OnInit {
     name = name.trim();
     let isChecked = false;
     if (!name) { return; }
-    this.todoService.addTodo({ name, isChecked } as Todo)
-    .subscribe(todo => {
+    this.todoService.addTodo({ name, isChecked } as Todo).subscribe((todo) => {
       this.todos.push(todo);
     });
   }
@@ -48,14 +50,31 @@ export class TodoListComponent implements OnInit {
   }
 
   delete(todo: Todo): void {
-    this.todoService.deleteTodo(todo.id).subscribe(() =>
-    this.todos = this.todos.filter(
-      todoToDelete => todoToDelete.id !== todo.id)
-    );
+    this.todoService.deleteTodo(todo.id).subscribe(
+      () => (this.todos = this.todos.filter(
+        todoToDelete => todoToDelete.id !== todo.id))
+        );
     this.isVisible = false; // Hide the edit pane on deletion
   }
 
   markDone(): void {
     console.log('Item will be marked as done here');
   }
+
+  subscribeToEvent(componentRef: Component): void {
+    if (!(componentRef instanceof EditTodoComponent)) {
+      return;
+    }
+    const child: EditTodoComponent = componentRef;
+    child.newTitleEvent.subscribe(
+      (result) => this.editedTodo.name = result
+    );
+  }
+
+  unsubscribe(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
 }
